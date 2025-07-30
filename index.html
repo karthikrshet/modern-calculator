@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modern Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <div class="display-screen">
+                <div id="display"></div>
+            </div>
+            <div class="buttons">
+                <table>
+                    <tr>
+                        <td><button class="btn-operator" id="clear">C</button></td>
+                        <td><button class="btn-operator" id="/">&divide;</button></td>
+                        <td><button class="btn-operator" id="*">&times;</button></td>
+                        <td><button class="btn-operator" id="backspace">&#x232B;</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn-number" id="7">7</button></td>
+                        <td><button class="btn-number" id="8">8</button></td>
+                        <td><button class="btn-number" id="9">9</button></td>
+                        <td><button class="btn-operator" id="-">-</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn-number" id="4">4</button></td>
+                        <td><button class="btn-number" id="5">5</button></td>
+                        <td><button class="btn-number" id="6">6</button></td>
+                        <td><button class="btn-operator" id="+">+</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn-number" id="1">1</button></td>
+                        <td><button class="btn-number" id="2">2</button></td>
+                        <td><button class="btn-number" id="3">3</button></td>
+                        <td rowspan="2"><button class="btn-equal" id="equal">=</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="btn-operator" id="(">(</button></td>
+                        <td><button class="btn-number" id="0">0</button></td>
+                        <td><button class="btn-operator" id=")">)</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="theme-toggle">
+            <button id="toggleTheme">Toggle Theme</button>
+        </div>
+    </div>
+    <footer>
+        Developed by <strong>Karthik Shet</strong>
+    </footer>
+<script>
+const display = document.querySelector("#display");
+const buttons = document.querySelectorAll("button");
+const toggleBtn = document.getElementById("toggleTheme");
+const body = document.body;
+
+buttons.forEach((item) => {
+  item.onclick = () => {
+    if (item.id == "clear") {
+      display.innerText = "";
+    } else if (item.id == "backspace") {
+      let string = display.innerText.toString();
+      display.innerText = string.substr(0, string.length - 1);
+    } else if (display.innerText != "" && item.id == "equal") {
+      try {
+        display.innerText = eval(display.innerText);
+      } catch {
+        display.innerText = "Error!";
+        setTimeout(() => (display.innerText = ""), 1500);
+      }
+    } else if (display.innerText == "" && item.id == "equal") {
+      display.innerText = "Empty!";
+      setTimeout(() => (display.innerText = ""), 1500);
+    } else {
+      display.innerText += item.id;
+    }
+  };
+});
+
+// Theme Toggle
+toggleBtn.onclick = () => {
+  body.classList.toggle("dark-mode");
+};
+</script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: sans-serif; background: linear-gradient(to bottom right, rgb(97, 1, 215), rgb(255, 174, 255)); transition: 0.3s; }
+.container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 90vh; }
+.calculator { padding: 20px; border-radius: 10px; box-shadow: 0 0 30px #000; background: #fff; }
+#display { margin: 0 10px; height: 150px; max-width: 270px; font-size: 30px; text-align: right; overflow-x: auto; }
+button { height: 60px; width: 60px; border-radius: 30px; margin: 5px; font-size: 20px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; border: none; }
+button:hover { transform: scale(1.05); box-shadow: 0 3px 10px rgba(0,0,0,0.2); }
+button#equal { height: 130px; }
+.btn-number { background: #c3eaff; color: #000; }
+.btn-operator { background: #ffd0fb; color: #f967f3; }
+.btn-equal { background: #adf9e7; color: #000; }
+button#clear { background: #ffd5d8; color: #fc4552; }
+.theme-toggle { margin-top: 15px; }
+#toggleTheme { background: #000; color: #fff; padding: 10px 20px; border-radius: 8px; }
+footer { text-align: center; color: #fff; margin-top: 20px; font-size: 18px; }
+footer strong { color: #ffdd57; }
+.dark-mode { background: #222; color: #fff; }
+.dark-mode .calculator { background: #333; }
+</style>
+</body>
+</html>
