@@ -19,17 +19,25 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
         .container {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             width: 100%;
             max-width: 400px;
+            margin: 40px auto;
         }
 
         .calculator {
@@ -85,7 +93,6 @@
         .btn-equal {
             background: #adf9e7;
             color: #000;
-            grid-column: span 1;
         }
 
         button#clear {
@@ -94,7 +101,7 @@
         }
 
         button#toggleTheme {
-            margin-top: 15px;
+            margin-top: 20px;
             background: #000;
             color: #fff;
             padding: 10px 20px;
@@ -104,7 +111,7 @@
         footer {
             text-align: center;
             color: #fff;
-            margin-top: 20px;
+            margin-top: 30px;
             font-size: 1rem;
         }
 
@@ -131,6 +138,11 @@
 </head>
 
 <body>
+    <!-- Navigation Bar -->
+    <nav>
+        Modern Calculator
+    </nav>
+
     <div class="container">
         <div class="calculator">
             <div id="display" aria-label="Calculator display"></div>
